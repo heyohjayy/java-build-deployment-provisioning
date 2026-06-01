@@ -165,7 +165,7 @@ t2.medium or larger
 Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/heyohjayy/java-build-deployment-provisioning.git
 ```
 
 Move into the project directory:
