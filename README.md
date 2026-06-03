@@ -305,20 +305,20 @@ This demonstrates an end-to-end Java application delivery workflow using the pro
 
 ### Application Source Code & Build Process
 
-To validate the provisioned infrastructure, a Java Spring Boot login application was used as the deployment target.
+To validate the provisioned infrastructure, a Java Spring Boot web application was used as the deployment target.
 
-The application source code was cloned from a separate repository onto the Maven Build Server and packaged into a deployable WAR artifact using Maven.
+The application source code was maintained in a private Git repository and cloned onto the Maven Build Server for packaging and deployment. The same workflow can be applied to any Java Maven-based application repository.
 
-Clone the application:
+Example application clone:
 
 ```bash
-git clone https://github.com/loreon-learning-c001/devops-project-01.git
+git clone https://github.com/<organisation>/<application-repository>.git
 ```
 
 Navigate to the application directory:
 
 ```bash
-cd ~/devops-project-01/Java-Login-App
+cd <application-repository>
 ```
 
 Build the application:
@@ -326,6 +326,8 @@ Build the application:
 ```bash
 mvn clean package
 ```
+
+The build process removes previous build artefacts, validates the project configuration, compiles the source code, executes automated tests, resolves required dependencies, and packages the application into a deployable WAR artefact for deployment to an Apache Tomcat server.
 
 
 ![Maven Build Start](screenshots/01-maven-build-start.png)
