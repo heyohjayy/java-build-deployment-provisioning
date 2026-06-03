@@ -179,6 +179,32 @@ cd maven-apachetomcat-build
 
 ---
 
+## Operating System Compatibility
+
+The provisioning scripts were developed and tested on Ubuntu Linux. The same workflow can be adapted for Amazon Linux, CentOS, and RHEL with minor package manager changes.
+
+###
+
+| Distribution      | Update Command       | Package Installation Command                                            |
+| ----------------- | -------------------- | ----------------------------------------------------------------------- |
+| Ubuntu / Debian   | `sudo apt update`    | `sudo apt install -y wget curl git unzip openjdk-11-jdk`                |
+| Amazon Linux 2023 | `sudo dnf update -y` | `sudo dnf install -y wget curl git unzip java-11-amazon-corretto-devel` |
+| CentOS / RHEL     | `sudo yum update -y` | `sudo yum install -y wget curl git unzip java-11-openjdk-devel`         |
+
+### Additional Notes
+
+* Maven installation steps remain the same across all supported distributions.
+* Apache Tomcat installation and configuration steps remain the same across all supported distributions.
+* Service management uses `systemctl` on Ubuntu, Amazon Linux 2023, CentOS 7+, and RHEL 7+.
+* Firewall configuration commands may differ between distributions:
+
+  * Ubuntu commonly uses `ufw`
+  * CentOS and RHEL commonly use `firewalld`
+  * Amazon Linux may use either `firewalld` or AWS Security Groups
+* The Java application build process, WAR artifact generation, SCP transfer, Tomcat deployment, and application validation workflow remain unchanged.
+
+---
+
 ## Apache Maven Provisioning
 
 ```bash
@@ -277,16 +303,17 @@ This demonstrates an end-to-end Java application delivery workflow using the pro
 
 ---
 
-### Application Source Code &  Build Process
+### Application Source Code & Build Process
 
 To validate the provisioned infrastructure, a Java Spring Boot login application was used as the deployment target.
 
-The application source code was cloned from a separate repository onto the Maven Build Server and packaged into a deployable WAR artifact using Maven.                    
+The application source code was cloned from a separate repository onto the Maven Build Server and packaged into a deployable WAR artifact using Maven.
 
 Clone the application:
 
 ```bash
 git clone https://github.com/loreon-learning-c001/devops-project-01.git
+```
 
 Navigate to the application directory:
 
@@ -299,6 +326,7 @@ Build the application:
 ```bash
 mvn clean package
 ```
+
 
 ![Maven Build Start](screenshots/01-maven-build-start.png)
 
